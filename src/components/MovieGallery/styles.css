@@ -1,0 +1,12 @@
+.MovieGallery {
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 78%;
+    min-height: 200px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.GalleryItem {
+    width: 25%;
+    padding: 20px;
+}

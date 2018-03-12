@@ -1,0 +1,13 @@
+.Header {
+    border-bottom: 4px solid #c0ca33;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 0;
+    margin-bottom: 10px;
+}
+.title {
+    font-size: 32px;
+    text-transform: capitalize;
+}

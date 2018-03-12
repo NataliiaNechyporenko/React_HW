@@ -1,0 +1,10 @@
+.Navigation {
+    list-style: none;
+}
+
+.item {
+    display: inline-block;
+    font-size: 20px;
+    margin-right: 16px;
+    text-transform: uppercase;
+}

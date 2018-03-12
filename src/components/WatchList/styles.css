@@ -1,0 +1,22 @@
+.WatchList {
+    background-color: #c0ca33;
+    border-radius: 4px;
+    color: #1b1b1b;
+    min-height: 200px;
+    padding: 16px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+.WatchList__title {
+    font-size: 32px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+.MoviesList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.text {
+    font-size: 20px;
+}

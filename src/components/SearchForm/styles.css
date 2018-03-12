@@ -1,0 +1,15 @@
+.SearchForm {
+    background-color: #c0ca33;
+    border-radius: 2px;
+    display: block;
+    margin-bottom: 20px;
+    padding: 8px;
+}
+.searchInput {
+    background-color: #fff;
+    border: 0;
+    border-radius: 4px;
+    font-size: 18px;
+    padding: 4px 8px;
+    width: 100%;
+}
