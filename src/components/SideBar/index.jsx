@@ -5,9 +5,9 @@ import SearchForm from '../SearchForm';
 import Categories from '../Categories';
 import WatchList from '../WatchList';
 
-const SideBar = () => (
+const SideBar = ({onSearch, query}) => (
     <div className="SideBar">
-        <SearchForm />
+        <SearchForm onSearch={onSearch} query={query} />
         <Categories />
         <WatchList />
     </div>
