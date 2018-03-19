@@ -96,10 +96,11 @@ export default class App extends Component {
 
     getWatchList = () => {
         const localWatchList = JSON.parse(localStorage.getItem('watchList'));
-        console.log("localWatchList: ", localWatchList);
-        this.setState({
+        if (localWatchList) {
+            this.setState({
             watchList: localWatchList
         });
+    }
     }
 
     deleteFromWatchList = (movieCard) => {
