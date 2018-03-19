@@ -17,7 +17,6 @@ export default class SearchForm extends Component {
     );
     };
     render () {
-        console.log(this.props);
         return (
             <form className="SearchForm" action="#" onSubmit={this.handleSubmit}>
                 <input className="searchInput" placeholder="Search for movies by name..." value={this.state.inputValue} onChange={this.handleInputChange} />

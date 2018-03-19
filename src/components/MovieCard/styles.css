@@ -53,6 +53,7 @@ box-shadow: 0px 0px 24px 1px rgba(206,245,142,0.69);
     border: 1px solid #8c9900;
     border-radius: 4px;
     box-shadow: 0 2px 2px 0 rgba(33,33,33,.3);
+    cursor: pointer;
     font-weight: bold;
     font-size: 20px;
     height: 35px;
@@ -61,4 +62,9 @@ box-shadow: 0px 0px 24px 1px rgba(206,245,142,0.69);
     bottom: 8px;
     width: 35px;
     z-index: 100;
+    transition: all .3s;
+}
+.MovieCard__addBtn:hover {
+    background-color: #00e5ff;
+    border: 1px solid #00b2cc;
 }

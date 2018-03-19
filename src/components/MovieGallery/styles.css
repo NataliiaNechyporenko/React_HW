@@ -12,3 +12,10 @@
     width: 25%;
     padding: 20px;
 }
+.MovieGallery__msg {
+    color: #fff;
+    font-size: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    margin: auto;
+}

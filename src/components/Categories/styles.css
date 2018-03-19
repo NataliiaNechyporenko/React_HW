@@ -16,4 +16,8 @@
     margin-bottom: 16px;
     padding: 10px 8px;
     text-transform: uppercase;
+    transition: all .3s;
+}
+.btn:hover {
+    background-color: #00e5ff;
 }

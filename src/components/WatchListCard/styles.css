@@ -1,0 +1,48 @@
+.WatchListCard {
+    color: #fff;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    text-align: left;
+    position: relative;
+}
+
+.WatchListCard__img {
+    display: block;
+    width: 40%;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 8px;
+}
+.WatchListCard__info {
+    display: block;
+}
+.WatchListCard__title {
+    font-size: 16px;
+    line-height: 1.5;
+}
+.WatchListCard__reliase,
+.WatchListCard__rating {
+    font-size: 14px;
+    margin-top: 8px;
+}
+.WatchListCard__btn {
+    background-color: #c0ca33;
+    border: 1px solid #8c9900;
+    border-radius: 4px;
+    box-shadow: 0 2px 2px 0 rgba(33,33,33,.3);
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 20px;
+    height: 35px;
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    width: 35px;
+    z-index: 100;
+    transition: all .3s;
+}
+.WatchListCard__btn:hover {
+    background-color: #00e5ff;
+    border: 1px solid #00b2cc;
+}

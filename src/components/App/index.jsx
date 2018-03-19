@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 import v4 from 'uuid/v4';
 
@@ -25,7 +26,9 @@ export default class App extends Component {
     state = {
         movies: [],
         fApi: "/movie/popular",
-        searchQuery: ''
+        searchQuery: '',
+        watchList: [],
+        msg: `Loading...`
     };
 
     handleSearch = (query) => {
@@ -34,7 +37,16 @@ export default class App extends Component {
             searchQuery: `&query=${query}`
         }, () => {
             this.getMovies();
-            console.log(this.state.movies);});
+        });
+    };
+
+    getCategoriesMovies = (category) => {
+        this.setState({
+            fApi: category,
+            searchQuery: ``
+        }, () => {
+            this.getMovies();
+            })
     };
 
     getMovies = () => {
@@ -57,27 +69,63 @@ export default class App extends Component {
                     releaseDate: result.release_date,
                     rating: result.vote_average
                 }));
-                console.log(data);
-                this.setState({
-                    movies: mov
-                });
+                if (mov.length === 0) {
+                    this.setState ({
+                        msg: `Sorry, we didn't find anything... (⌣́_⌣̀)`,
+                        movies: mov
+                    })
+                } else {
+                    this.setState({
+                        movies: mov
+                    })
+                }
             })
             .catch(err => console.log(err))
     };
 
-    componentWillMount () {
+    addToWatchList = (movieCard) => {
+        const {watchList} = this.state;
+        const findCard = watchList.find(movie => (movie.id === movieCard.id || movie.movieTitle === movieCard.movieTitle));
+        if (findCard === undefined) {
+            this.setState(prevState => ({
+                watchList: prevState.watchList.concat(movieCard)
+            }), () => {
+                localStorage.setItem('watchList', JSON.stringify(this.state.watchList));
+            });
+        };
+    };
+
+    getWatchList = () => {
+        const localWatchList = JSON.parse(localStorage.getItem('watchList'));
+        console.log("localWatchList: ", localWatchList);
+        this.setState({
+            watchList: localWatchList
+        });
+    }
+
+    deleteFromWatchList = (movieCard) => {
+        const {watchList} = this.state;
+        localStorage.removeItem('watchList');
+        const newWatchList = watchList.filter(movie => movie.id !== movieCard.id);
+        this.setState({
+            watchList: newWatchList
+        });
+        localStorage.setItem('watchList', JSON.stringify(newWatchList));
+    }
+
+    componentDidMount () {
         this.getMovies();
+        this.getWatchList();
     }
 
     render() {
-        const { movies, searchQuery } = this.state;
-        console.log("query:", searchQuery);
+        const { movies, searchQuery, watchList, msg } = this.state;
         return (
             <div className="App">
                 <Header pageTitle="Movie Mate" navLinks={ navLinks }/>
                 <div className="AppBody">
-                    <SideBar onSearch={this.handleSearch} query={searchQuery} />
-                    <MovieGallery movies={movies} />
+                    <SideBar onSearch={this.handleSearch} query={searchQuery} getCategory={this.getCategoriesMovies} watchList={ watchList } deleteFromWatchList={this.deleteFromWatchList} />
+                    <MovieGallery movies={movies} addToWatchList={this.addToWatchList} msg={msg} />
                 </div>
             </div>
 
