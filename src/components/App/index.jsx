@@ -96,7 +96,7 @@ export default class App extends Component {
 
     getWatchList = () => {
         const localWatchList = JSON.parse(localStorage.getItem('watchList'));
-        if (localWatchList) {
+        if (localWatchList !== null) {
             this.setState({
             watchList: localWatchList
         });
