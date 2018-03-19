@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import './styles.css';
 import v4 from 'uuid/v4';
 
