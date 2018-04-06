@@ -4,7 +4,7 @@ import './styles.css';
 const Navigation = ({ navLinks }) => (
     <ul className="Navigation">
         { navLinks.map(link => (
-            <li key={link.id} className="item">{link.linkText}</li>
+            <li key={link.linkText} className="item">{link.linkText}</li>
         ))}
     </ul>
 );

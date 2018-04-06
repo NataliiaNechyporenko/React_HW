@@ -5,19 +5,17 @@ import v4 from 'uuid/v4';
 import Header from '../Header';
 import SideBar from '../SideBar';
 import MovieGallery from '../MovieGallery';
+import Modal from '../Modal';
 
 const navLinks = [
     {
-        id: v4(),
         linkText: "home"
     },
     {
-        id: v4(),
         linkText: "about"
     },
     {
-        id: v4(),
-        linkText: "browse"
+       linkText: "browse"
     }
 ];
 
@@ -26,11 +24,19 @@ export default class App extends Component {
         movies: [],
         fApi: "/movie/popular",
         searchQuery: '',
+        displayModal: false,
         watchList: [],
         msg: `Loading...`
     };
 
+    componentDidMount () {
+        this.getMovies();
+        this.getWatchList();
+    }
+
     handleSearch = (query) => {
+      console.log(query);
+        (query === '' || query === undefined) ? (this.setState({ displayModal: true })) :
         this.setState({
             fApi: "/search/movie",
             searchQuery: `&query=${query}`
@@ -38,6 +44,11 @@ export default class App extends Component {
             this.getMovies();
         });
     };
+
+    handleCloseModal = (evt) => {
+      evt.preventDefault();
+      this.setState({ displayModal: false });
+    }
 
     getCategoriesMovies = (category) => {
         this.setState({
@@ -113,15 +124,11 @@ export default class App extends Component {
         localStorage.setItem('watchList', JSON.stringify(newWatchList));
     }
 
-    componentDidMount () {
-        this.getMovies();
-        this.getWatchList();
-    }
-
     render() {
-        const { movies, searchQuery, watchList, msg } = this.state;
+        const { movies, searchQuery, watchList, msg, displayModal } = this.state;
         return (
             <div className="App">
+                { displayModal && <Modal message="Enter something for search" handleClose={this.handleCloseModal} /> }
                 <Header pageTitle="Movie Mate" navLinks={ navLinks }/>
                 <div className="AppBody">
                     <SideBar onSearch={this.handleSearch} query={searchQuery} getCategory={this.getCategoriesMovies} watchList={ watchList } deleteFromWatchList={this.deleteFromWatchList} />
