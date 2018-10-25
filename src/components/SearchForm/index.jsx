@@ -1,25 +1,27 @@
 import React, {Component} from 'react';
+// import PropTypes from 'prop-types';
+import {connect} from 'react-redux';
+import { changeSearch } from '../../redux/actions/search';
+import Input from '../Shared/Input';
 import './styles.css';
 
-export default class SearchForm extends Component {
-    state = {
-        inputValue: ""
-    };
-    handleSubmit = (evt) => {
-        evt.preventDefault();
-        this.props.onSearch(this.state.inputValue);
-    };
-    handleInputChange = (evt) => {
-        const value = evt.target.value;
-        this.setState({
-            inputValue: value
-        }
-    );
-    };
-    render () {
-        return (
-            <form className="SearchForm" action="#" onSubmit={this.handleSubmit}>
-                <input className="searchInput" placeholder="Search for movies by name..." value={this.state.inputValue} onChange={this.handleInputChange} />
-            </form>
-        )
-    }};
+const SearchForm  = ({currentSearchValue, onChange}) => (
+    <form className="SearchForm" action="#" onSubmit={this.handleSubmit}>
+        <Input cls="searchInput" 
+        placeholder="Search for movies by name..."
+        onChange={evt => {onChange(evt.target.value)}}
+        value={currentSearchValue}
+        name="search"
+        type="text" />
+    </form>
+)
+
+const mSTP = state => ({
+        currentSearchValue: state.searchValue
+      });
+      
+      const mDTP = dispatch => ({
+        onChange: (searchValue) => dispatch(changeSearch(searchValue)),
+      });
+      
+export default connect(mSTP, mDTP)(SearchForm);
