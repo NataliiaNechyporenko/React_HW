@@ -1,23 +1,39 @@
 import React from 'react';
-import './styles.css';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import WatchListCard from '../WatchListCard';
 
-const WatchList = ({watchList, deleteFromWatchList}) => (
-    <div className="WatchList">
-        <h2 className="WatchList__title">WatchList</h2>
-        <div className="MoviesListContainer">
-            {watchList.length === 0
-                ? <p className="text">Add movies to watchlist...</p>
-                : <div className="MoviesList">
-                    {watchList.map(movie => (
-                        <div className="WatchList__item" key={movie.id}>
-                            <WatchListCard movie={movie} deleteFromWatchList={deleteFromWatchList} />
-                        </div>
-                    ))}
-                </div>
-            }
+import './styles.css';
+
+const WatchList = ({ watchList }) => (
+  <div className="WatchList">
+    <h2 className="WatchList__title">WatchList</h2>
+    <div className="MoviesListContainer">
+      {watchList.length === 0 ? (
+        <p className="text">Add movies to watchlist...</p>
+      ) : (
+        <div className="MoviesList">
+          {watchList.map(movie => (
+            <div className="WatchList__item" key={movie.id}>
+              <WatchListCard movie={movie}/>
+            </div>
+          ))}
         </div>
+      )}
     </div>
+  </div>
 );
 
-export default WatchList;
+WatchList.defaultProps = {
+  watchList: [],
+};
+
+WatchList.propTypes = {
+  watchList: PropTypes.arrayOf(PropTypes.shape()),
+};
+
+const mSTP = state => ({
+  watchList: state.watchList,
+});
+
+export default connect(mSTP)(WatchList);
