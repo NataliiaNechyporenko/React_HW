@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './styles.css';
 
-const WatchListCard = ({movie}) =>  {
+const WatchListCard = ({movie, onDelete}) =>  {
     // const deleteMovie = (evt) => {
     //     evt.preventDefault();
     //     let movieCard = movie;
@@ -17,17 +17,25 @@ const WatchListCard = ({movie}) =>  {
             <p className="WatchListCard__reliase">{`Released: ${movie.release_date.slice(0, 4)}`}</p>
             <p className="WatchListCard__rating">Rating: {movie.vote_average}</p>
         </div>
-        {/* <button className="WatchListCard__btn" onClick={deleteMovie} type="button" >-</button> */}
+        <button className="WatchListCard__btn"
+        onClick={(evt) => {
+            evt.preventDefault();
+            console.log(movie.id);
+            onDelete(movie.id);
+        } }
+        type="button" >-</button>
     </div>
 )};
 
 
 WatchListCard.defaultProps = {
-  movie: {}
+  movie: {},
+  onDelete: () => {}
 };
 
 WatchListCard.propTypes = {
-  movie: PropTypes.shape()
+  movie: PropTypes.shape(),
+  onDelete: PropTypes.func
 };
 
 export default WatchListCard;

@@ -1,11 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { deleteMovieFromWatchList } from '../../redux/actions/watchlist';
 import WatchListCard from '../WatchListCard';
 
 import './styles.css';
 
-const WatchList = ({ watchList }) => (
+const WatchList = ({ watchList, onDelete }) => (
   <div className="WatchList">
     <h2 className="WatchList__title">WatchList</h2>
     <div className="MoviesListContainer">
@@ -15,7 +16,7 @@ const WatchList = ({ watchList }) => (
         <div className="MoviesList">
           {watchList.map(movie => (
             <div className="WatchList__item" key={movie.id}>
-              <WatchListCard movie={movie}/>
+              <WatchListCard movie={movie} onDelete={onDelete} />
             </div>
           ))}
         </div>
@@ -26,14 +27,20 @@ const WatchList = ({ watchList }) => (
 
 WatchList.defaultProps = {
   watchList: [],
+  onDelete: () => {}
 };
 
 WatchList.propTypes = {
   watchList: PropTypes.arrayOf(PropTypes.shape()),
+  onDelete: PropTypes.func
 };
 
 const mSTP = state => ({
   watchList: state.watchList,
 });
 
-export default connect(mSTP)(WatchList);
+const mDTP = dispatch => ({
+  onDelete: (id) => dispatch(deleteMovieFromWatchList(id)),
+});
+
+export default connect(mSTP, mDTP)(WatchList);

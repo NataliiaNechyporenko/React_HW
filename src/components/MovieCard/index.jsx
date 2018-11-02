@@ -34,19 +34,13 @@ const MovieCard = ({ movie, onAddMovieToWatchList }) => (
 
 MovieCard.defaultProps = {
   movie: {},
-  // watchList: [],
   onAddMovieToWatchList: () => {},
 };
 
 MovieCard.propTypes = {
   movie: PropTypes.shape(),
   onAddMovieToWatchList: PropTypes.func,
-  // watchList: PropTypes.arrayOf(PropTypes.shape())
 };
-
-// const mSTP = state => ({
-//   watchList: state.watchList.data,
-// });
 
 const mDTP = dispatch => ({
   onAddMovieToWatchList: (movie) => dispatch(addMovieToWatchList(movie)),

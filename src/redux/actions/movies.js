@@ -10,12 +10,12 @@ const getMoviesStart = () => ({
   type: GET_MOVIES_START, 
 });
 
-const getMoviesSuccess = movies => ({
+export const getMoviesSuccess = movies => ({
   type: GET_MOVIES_SUCCESS,
   payload: movies,
 });
 
-const getMoviesFail = error => ({
+export const getMoviesFail = error => ({
   type: GET_MOVIES_FAIL,
   payload: error,
 })
