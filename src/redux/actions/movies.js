@@ -20,15 +20,13 @@ export const getMoviesFail = error => ({
   payload: error,
 })
 
-export const getMovies = () => dispatch => {
+export const getMovies = (category = 'popular') => dispatch => {
   dispatch(getMoviesStart());
 
   axios
-  .get('https://api.themoviedb.org/3/movie/popular?api_key=4625b62e0cb64ba1828971e21a3d765b')
+  .get(`https://api.themoviedb.org/3/movie/${category}?api_key=4625b62e0cb64ba1828971e21a3d765b`)
   .then(({data}) => {
     console.log(data);
     dispatch(getMoviesSuccess(data.results))})
   .catch(err => dispatch(getMoviesFail(err.response)));
 };
-
-export const x=9;

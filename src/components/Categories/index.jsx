@@ -1,18 +1,33 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getMovies } from '../../redux/actions/movies';
+
 import './styles.css';
 
-const Categories = ({getCategory}) => {
+const Categories = ({onClick}) => {
     const handleClick = (evt) => {
         evt.preventDefault();
-        let choise = evt.target.id;
-        getCategory(choise);
+        const category = evt.target.id;
+        onClick(category);
     };
     return (
     <div className="Categories">
-        <button className="btn" onClick={handleClick} id="/movie/popular">popular</button>
-        <button className="btn" onClick={handleClick} id="/movie/top_rated">top rating</button>
-        <button className="btn" onClick={handleClick} id="/movie/upcoming">upcomming</button>
+        <button className="btn" onClick={handleClick} id="popular" type="button" >popular</button>
+        <button className="btn" onClick={handleClick} id="top_rated" type="button">top rating</button>
+        <button className="btn" onClick={handleClick} id="upcoming" type="button">upcomming</button>
     </div>
 )};
 
-export default Categories;
+Categories.defaultProps = {
+  onClick: () => {}
+};
+
+Categories.propTypes = {
+  onClick: PropTypes.func
+};
+
+const mDTP = dispatch => ({
+ onClick: (category) => dispatch(getMovies(category))
+})
+export default connect(null, mDTP)(Categories);
