@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import HomePage from '../pages/home';
-import About from '../pages/about';
-import Movie from '../pages/movie';
+import AboutPage from '../pages/about';
+import MoviePage from '../pages/movie';
 import NotFoundPage from '../pages/notFound';
 import Header from '../Header';
 import SideBar from '../SideBar';
@@ -12,9 +12,9 @@ import Modal from '../Modal';
 import './styles.css';
 
 const navLinks = [
-  { linkText: "home" },
-  { linkText: "about" },
-  { linkText: "browse" }
+  { linkText: "home", linkUrl: "/" },
+  { linkText: "about", linkUrl: "/about" },
+  { linkText: "browse", linkUrl: "/" }
 ];
 
 export default class App extends Component {
@@ -43,8 +43,8 @@ export default class App extends Component {
           <SideBar onSearch={this.handleSearch} getCategory={this.getCategoriesMovies} deleteFromWatchList={this.deleteFromWatchList} />
           <Switch>
             <Route exact path="/" component={ HomePage } />
-            <Route path="/about" component={ About } />
-            <Route path="/:id" component={ Movie } />
+            <Route path="/about" component={ AboutPage } />
+            <Route path="/movie/:id" component={ MoviePage } />
             <Route component={ NotFoundPage } />
           </Switch>
         </div>

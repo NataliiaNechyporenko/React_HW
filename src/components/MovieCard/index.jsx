@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { addMovieToWatchList } from '../../redux/actions/watchlist';
 
 import './styles.css';
@@ -20,6 +21,9 @@ const MovieCard = ({ movie, onAddMovieToWatchList }) => (
         0,
         4,
       )}`}</p>
+      <p className="link-more-p">
+        <Link to={`/movie/:${movie.id}`}>Learn more...</Link>
+      </p>
       <button
         className="MovieCard__addBtn"
         onClick={evt => {
